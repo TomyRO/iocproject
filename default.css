@@ -110,6 +110,13 @@ hr
 {
 	width: 1200px;
 	margin: 0px auto;
+    background-color: white;
+}
+
+.container#header {
+    width: 1200px;
+    margin: 0px auto;
+    background-color: transparent;
 }
 
 .clearfix
@@ -218,7 +225,7 @@ hr
 	{
 		position: relative;
 		overflow: hidden;
-		padding: 0em 0em 5em 0em;
+		padding: 2em 0em 5em 0em;
 	}
 
 /*********************************************************************************/
@@ -543,11 +550,6 @@ hr
     float: left;
 }
 
-#sidebar {
-    width: 25%;
-    float: right;
-}
-
 .tutorial-image {
     background-image: url('resources/programming_logo.png');
     background-size: 200px 200px;
@@ -556,6 +558,7 @@ hr
     background-repeat: no-repeat;
     border-style: solid;
     border-width: 1px;
+    border-color: #ddd;
     float: left;
 }
 
@@ -563,10 +566,16 @@ hr
     height: 200px;
     border-style: solid;
     border-width: 1px;
+    border-color: #ddd;
+    float: left;
+    width: 600px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .tutorial-item {
     margin-bottom: 30px;
+    height: 200px;
 }
 
 
@@ -601,4 +610,44 @@ input[type=submit], input[type=text], input[type=password] {
 
 #login-credentials input[type=submit], #signup-credentials input[type=submit] {
     margin-top: 15px;
+}
+
+#sidebar {
+    width: 25%;
+    float: right;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ddd;
+}
+
+#sidebar #top-rated {
+    display: block;
+    height: 33px;
+    background-color: #6960ec;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
+#top-rated-list {
+    -webkit-padding-start: 0px;
+}
+
+.top-tutorial {
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #ddd;
+    height: 28px;
+    padding-top: 7px;
+    padding-left: 10px;
+}
+
+.top-tutorial a {
+    color: #424242;
+    font-weight: bold;
+}
+
+.top-tutorial:hover {
+    background-color: #fafafa;
 }
