@@ -58,7 +58,7 @@ $arrCategories = array (
 		"title" => "Networking",
 		"icon" => "fa-sitemap",
 	),
-);	
+);
 
 /* LOGIN */
 if (isset($_GET["page"]) && $_GET["page"] == "login" && isset($_POST["btnLogin"]))
@@ -67,7 +67,7 @@ if (isset($_GET["page"]) && $_GET["page"] == "login" && isset($_POST["btnLogin"]
 	$strPasswordEncrypted = md5($_POST["password"]);
 	$login = array_reduce(
 		$arrUsers,
-		function ($result, $item) 
+		function ($result, $item)
 		{
 			global $strEmail, $strPasswordEncrypted;
 			if ($item["email"]==$strEmail && $item["password"]==$strPasswordEncrypted)
