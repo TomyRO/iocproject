@@ -8,14 +8,27 @@
 	<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
+	<?php 
+		$arrCategories = array (
+			"programming" => "?cat=programming",
+			"photography" => "?cat=photography",
+			"gardening" => "?cat=gardening",
+			"sports" => "?cat=sports",
+			"mobile" => "?cat=mobile",
+			"photoshop" => "?cat=photoshop",
+			"networking" => "?cat=networking",
+		);	
+	?>
 	<?php require_once("chunks/header.php"); ?>
-	<?php require_once("chunks/categories.php"); ?>
-<div id="wrapper">
-	<div id="page" class="container">
-		<div id="content">
+	<div id="wrapper">
+		<div id="page" class="container">
+			<?php
+				$page = isset($_GET["page"]) ? $_GET["page"] : "home";
+				require_once("chunks/".$page.".php");
+			?>
 		</div>
 	</div>
-</div>
+<!--
 <div id="portfolio-wrapper">
 	<div id="portfolio" class="container">
 		<div class="title">
@@ -35,5 +48,6 @@
 			<a href="#" class="button">Read More</a> </div>
 	</div>
 </div>
+-->
 </body>
 </html>
