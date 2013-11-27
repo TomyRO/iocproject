@@ -1,6 +1,7 @@
 <?php
 /* DATAZZzzzZZZ*/
-ini_set("display_errors",1);
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
 
 session_start();
 
@@ -102,7 +103,10 @@ if (isset($_GET["page"]) && $_GET["page"]=="profile" && empty($_SESSION["account
 
 
 function redirect($url)
-{
-	header("Location: ".$url);
+{	
+	$strBasePath = dirname($_SERVER["SCRIPT_NAME"]);
+	if ($strBasePath == "/")
+		$strBasePath = "";
+	header("Location: ".$strBasePath.$url);
 	exit();
 }
