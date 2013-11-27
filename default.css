@@ -30,6 +30,10 @@ ul
 {
 	margin-bottom: 0px;
 }
+li
+{
+    list-style: none;
+}
 p
 {
 	line-height: 180%;
@@ -42,6 +46,7 @@ strong
 a
 {
 	color: #AF2117;
+    text-decoration: none;
 }
 
 a:hover
@@ -309,7 +314,7 @@ hr
 		border-top: 0;
 		padding-top: 0;
 	}
- cvdssaasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssswedgbhmnnn                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         m
+
 /*********************************************************************************/
 /* Portfolio                                                                     */
 /*********************************************************************************/
@@ -535,14 +540,39 @@ hr
 		float: right;
 	}
 
+#gallery {
+    width: 70%;
+    float: left;
+}
+
+#sidebar {
+    width: 25%;
+    float: right;
+}
+
+.tutorial-image {
+    background-image: url('resources/programming_logo.png');
+    background-size: 200px 200px;
+    height: 200px;
+    width: 200px;
+    background-repeat: no-repeat;
+    border-style: solid;
+    border-width: 1px;
+    float: left;
+}
+
+.tutorial-descript {
+    height: 200px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.tutorial-item {
+    margin-bottom: 30px;
+}
 
 
-
-
-
-
-
-
-
-
+.tutorial-item a {
+    color: black;
+}
 

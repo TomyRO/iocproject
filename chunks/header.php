@@ -16,6 +16,7 @@
 					<li><a href="#" accesskey="2" title="">Articles</a></li>
 					<li><a href="#" accesskey="3" title="">Wishlist</a></li>
 					<li><a href="#" accesskey="4" title="">Tips</a></li>
+					<li><a href="/iocproject/login.php" accesskey="5" title="">Login/Signup</a></li>
 				</ul>
 			</div>
 		</div>

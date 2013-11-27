@@ -1,7 +1,7 @@
 <div id="featured-wrapper">
 	<div id="featured" class="container">
-		<div class="column1"><span class="icon icon-cogs"></span>
-			<h2>Maecenas luctus lectus</h2>
+		<div class="column1"><a href="/iocproject/category.php"><span class="icon icon-cogs"></span>
+			<h2>Maecenas luctus lectus</h2></a>
 		</div>
 		<div class="column2"><span class="icon icon-suitcase"></span>
 			<h2>Etiam rhoncus volutpat</h2>
