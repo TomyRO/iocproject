@@ -82,6 +82,7 @@ if (isset($_GET["page"]) && $_GET["page"] == "login" && isset($_POST["btnLogin"]
 
 	if ($login)
 	{
+		$login["interests"] = array();
 		$_SESSION["account"] = $login;
 		redirect("/");
 	}
@@ -101,6 +102,12 @@ if (isset($_GET["page"]) && $_GET["page"]=="profile" && empty($_SESSION["account
 	redirect("/?page=login");
 }
 
+if (isset($_GET["page"]) && $_GET["page"]=="profile" && isset($_POST["btnSaveProfile"]))
+{
+	unset($_POST["btnSaveProfile"]);
+	$_SESSION["account"] = array_merge($_SESSION["account"], $_POST);
+
+}
 
 function redirect($url)
 {	

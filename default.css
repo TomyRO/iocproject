@@ -100,6 +100,25 @@ hr
 	display: none;
 }
 
+table *
+{
+	vertical-align: top;
+}
+table td
+{
+	padding:10px;
+}
+.checkboxes label
+{
+	display: inline-block;
+	width: 100px;
+}
+.checkboxes input[type=checkbox]
+{
+	padding-right: 38px;
+
+}
+
 /** WRAPPER */
 
 #wrapper {
