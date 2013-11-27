@@ -133,10 +133,7 @@ hr
 
 	#logo
 	{
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
+        float: left;
 	}
 	
 	#logo h1
@@ -160,8 +157,8 @@ hr
 
 	#searchform
 	{
-		float: left;
-		padding: 12px 0;
+		float: right;
+		padding: 7px 0;
 	}
 
 	#searchform .button 
@@ -172,9 +169,7 @@ hr
 
 	#menu
 	{
-		position: absolute;
-		right: 0;
-		top: 0;
+        float: right;
 	}
 	
 	#menu ul
