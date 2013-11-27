@@ -1,3 +1,6 @@
+<?php
+	require_once("controller.php");
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -8,47 +11,6 @@
 	<link href="font-awesome.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-	<?php 
-		ini_set("display_errors",1);
-
-		$arrCategories = array (
-			array (
-				"link" => "programming",
-				"title" => "Programming",
-				"icon" => "fa-html5",
-			),
-			array (
-				"link" => "photography",
-				"title" => "Photography",
-				"icon" => "fa-camera",
-			),
-			array (
-				"link" => "gardening",
-				"title" => "Gardening",
-				"icon" => "fa-pagelines",
-			),
-			array (
-				"link" => "sports",
-				"title" => "Sports",
-				"icon" => "fa-trophy",
-			),
-			array (
-				"link" => "mobile",
-				"title" => "Mobile",
-				"icon" => "fa-android",
-			),
-			array (
-				"link" => "photoshop",
-				"title" => "Photoshop",
-				"icon" => "fa-picture-o",
-			),
-			array (
-				"link" => "networking",
-				"title" => "Networking",
-				"icon" => "fa-sitemap",
-			),
-		);	
-	?>
 	<?php require_once("chunks/header.php"); ?>
 	<div id="wrapper">
 		<div id="page" class="container">

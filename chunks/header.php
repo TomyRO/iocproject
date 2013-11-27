@@ -16,7 +16,20 @@
 					<li><a href="#" accesskey="2" title="">Articles</a></li>
 					<li><a href="#" accesskey="3" title="">Wishlist</a></li>
 					<li><a href="#" accesskey="4" title="">Tips</a></li>
-					<li><a href="?page=login" accesskey="5" title="">Login/Signup</a></li>
+					<?php 
+					if (isset($_SESSION["account"]))
+					{
+						?>	
+						<li><a href="?page=profile" accesskey="5" title="">Profile</a></li>
+						<?php 
+					}
+					else		
+					{
+						?>
+						<li><a href="?page=login" accesskey="5" title="">Login/Signup</a></li>
+						<?php
+					}
+					?>
 				</ul>
 			</div>
 		</div>
