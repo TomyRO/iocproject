@@ -16,6 +16,8 @@
 		<div id="page" class="container">
 			<?php
 				$page = isset($_GET["page"]) ? $_GET["page"] : "home";
+				if (!file_exists("chunks/".$page.".php"))
+					$page="404";
 				require_once("chunks/".$page.".php");
 			?>
 		</div>

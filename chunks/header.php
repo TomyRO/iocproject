@@ -2,7 +2,7 @@
 	<div id="header-wrapper2">
 		<div id="header" class="container">
 			<div id="logo">
-				<h1><a href="#">Logo</a></h1>
+				<h1><a href="/">Logo</a></h1>
 			</div>
             <div id="searchform">
                 <form action="#" method="get">
@@ -12,10 +12,10 @@
             </div>
 			<div id="menu">
 				<ul>
-					<li><a href="#" accesskey="1" title="">Categories</a></li>
-					<li><a href="#" accesskey="2" title="">Articles</a></li>
-					<li><a href="#" accesskey="3" title="">Wishlist</a></li>
-					<li><a href="#" accesskey="4" title="">Tips</a></li>
+					<li><a href="?page=categories" accesskey="1" title="">Categories</a></li>
+					<li><a href="?page=articles" accesskey="2" title="">Articles</a></li>
+					<li><a href="?page=wishlist" accesskey="3" title="">Wishlist</a></li>
+					<li><a href="?page=tips" accesskey="4" title="">Tips</a></li>
 					<?php 
 					if (isset($_SESSION["account"]))
 					{
