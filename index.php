@@ -5,18 +5,48 @@
 	<title>IOC Project</title>
 	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 	<link href="default.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="font-awesome.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
 	<?php 
+		ini_set("display_errors",1);
+
 		$arrCategories = array (
-			"programming" => "?cat=programming",
-			"photography" => "?cat=photography",
-			"gardening" => "?cat=gardening",
-			"sports" => "?cat=sports",
-			"mobile" => "?cat=mobile",
-			"photoshop" => "?cat=photoshop",
-			"networking" => "?cat=networking",
+			array (
+				"link" => "programming",
+				"title" => "Programming",
+				"icon" => "fa-html5",
+			),
+			array (
+				"link" => "photography",
+				"title" => "Photography",
+				"icon" => "fa-camera",
+			),
+			array (
+				"link" => "gardening",
+				"title" => "Gardening",
+				"icon" => "fa-pagelines",
+			),
+			array (
+				"link" => "sports",
+				"title" => "Sports",
+				"icon" => "fa-trophy",
+			),
+			array (
+				"link" => "mobile",
+				"title" => "Mobile",
+				"icon" => "fa-android",
+			),
+			array (
+				"link" => "photoshop",
+				"title" => "Photoshop",
+				"icon" => "fa-picture-o",
+			),
+			array (
+				"link" => "networking",
+				"title" => "Networking",
+				"icon" => "fa-sitemap",
+			),
 		);	
 	?>
 	<?php require_once("chunks/header.php"); ?>
