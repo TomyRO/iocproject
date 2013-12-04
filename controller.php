@@ -12,7 +12,7 @@ class ErrorMessages
 	public static function show($strIndex)
 	{
 		if(array_key_exists($strIndex, self::$errors))
-			echo $errors[$strIndex];
+			echo self::$errors[$strIndex];
 	}
 }
 
@@ -53,14 +53,15 @@ if (isset($_GET["page"]) && $_GET["page"] == "login")
 	{
 		if ($_POST["user_password"]!==$_POST["user_password_confirm"])
 		{	
-			$_Error["btnSignup"] = "Password do not match!";
+			ErrorMessages::$errors["btnSignup"] = "Password do not match!";
 		} else
 		{
 			$dbh->exec("
 				INSERT INTO `users` 
 				SET
 					`user_email` = ".$dbh->quote($_POST["user_email"]).",
-					`user_password` = ".$dbh->quote(md5($_POST["user_password"]))."
+					`user_password` = ".$dbh->quote(md5($_POST["user_password"])).",
+					`user_favorites` = ".$dbh->quote(json_encode(array()))."
 			");
 			$nUserID = $dbh->lastInsertId();
 			$result = $dbh->query("

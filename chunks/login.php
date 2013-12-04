@@ -17,6 +17,7 @@
 		<div class="title">
 			<h2>New User?</h2>
 		</div>
+        <?php ErrorMessages::show("btnSignup"); ?>
 		<p>Create an account to access all of the features of out website!</p>
         <div id="signup-credentials">
             <form action="" method="post">
