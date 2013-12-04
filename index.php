@@ -6,10 +6,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>IOC Project</title>
+    <script type="text/javascript" src="scripts/jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="scripts/jquery-ui-1.7.2.custom.min.js"></script>
 	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 	<link href="default.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="font-awesome.css" rel="stylesheet" type="text/css" media="all" />
-</head>
+    <link rel="Stylesheet" type="text/css" href="style/jHtmlArea.css" />
+    <script type="text/javascript" src="scripts/jHtmlArea-0.7.5.js"></script>
+
+    <link rel="Stylesheet" type="text/css" href="style/jqueryui/ui-lightness/jquery-ui-1.7.2.custom.css" />
+</head>>
 <body>
 	<?php require_once("chunks/header.php"); ?>
 	<div id="wrapper">

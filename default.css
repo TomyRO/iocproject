@@ -697,3 +697,24 @@ input[type=submit], input[type=text], input[type=password] {
 #comment-list ul {
     -webkit-padding-start: 0px;
 }
+
+#tutorial-create {
+    padding-left: 10px;
+    float: left;
+}
+
+#title {
+    margin-bottom: 50px;
+}
+
+#title h2 {
+    color: red;
+}
+
+#title input[type=text] {
+    width: 400px;
+}
+
+.jHtmlArea {
+    margin-bottom: 50px;
+}
