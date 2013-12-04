@@ -20,15 +20,13 @@
 		<p>Create an account to access all of the features of out website!</p>
         <div id="signup-credentials">
             <form action="" method="post">
-                Username:<br>
-                <input type="text" name="username"><br>
-                Password:<br>
-                <input type="password" name="password"><br>
                 Email:<br>
-                <input type="text" name="email"><br>
-                Repeat Email:<br>
-                <input type="text" name="repeat-email"><br>
-                <input type="submit" name="Create">
+                <input type="text" name="user_email"><br>
+                Password:<br>
+                <input type="password" name="user_password"><br>
+                Repeat Password:<br>
+                <input type="password" name="user_password_confirm"><br>
+                <input type="submit" name="btnSignup" value="Sign Up!">
             </form>
         </div>
 </div>
