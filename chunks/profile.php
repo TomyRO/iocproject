@@ -5,7 +5,7 @@
 				Email: 
 			</td>
 			<td>
-				<input name="email" value="<?php echo @$_SESSION["account"]["email"];?>"/>
+				<input name="user_email" value="<?php echo @$_SESSION["account"]["user_email"];?>"/>
 			</td>
 		</tr>
 		<tr>
@@ -13,7 +13,7 @@
 				Name: 
 			</td>
 			<td>
-				<input name="name"  value="<?php echo @$_SESSION["account"]["name"];?>"/>
+				<input name="user_name"  value="<?php echo @$_SESSION["account"]["user_name"];?>"/>
 			</td>
 		</tr>
 		<tr>
@@ -21,7 +21,7 @@
 				Location: 
 			</td>
 			<td>
-				<input name="location"  value="<?php echo @$_SESSION["account"]["location"];?>"/>
+				<input name="user_location"  value="<?php echo @$_SESSION["account"]["user_location"];?>"/>
 			</td>
 		</tr>
 		<tr>
@@ -31,11 +31,12 @@
 			<td class="checkboxes">
 			<?php 
 			$i = 0;
+			$arrUserFavorites = json_decode($_SESSION["account"]["user_favorites"]);
 			foreach ($arrCategories as $objCategory)
 			{
 				?>
-				<input type="checkbox" value="<?php echo $objCategory["link"];?>" name="interests[]" <?php echo (in_array($objCategory["link"], $_SESSION["account"]["interests"])?"checked":"");?>/>
-				<label><?php echo $objCategory["title"];?></label>
+				<input type="checkbox" value="<?php echo $objCategory["category_id"];?>" name="user_favorites[]" <?php echo (in_array($objCategory["category_id"], $arrUserFavorites)?"checked":"");?>/>
+				<label><?php echo $objCategory["category_title"];?></label>
 				<?php
 				if (++$i%4==0)
 					echo "<br />";

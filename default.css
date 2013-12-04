@@ -570,8 +570,8 @@ table td
 }
 
 .tutorial-image {
-    background-image: url('resources/programming_logo.png');
-    background-size: 200px 200px;
+    background: url('resources/programming_logo.png') center center;
+    background-size: 170px;
     height: 200px;
     width: 200px;
     background-repeat: no-repeat;

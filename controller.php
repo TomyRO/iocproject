@@ -5,86 +5,75 @@ error_reporting(E_ALL);
 
 session_start();
 
-$arrUsers = array(
-		array(
-		"email" => "alex.dan.tomescu@gmail.com",
-		"username" => "userno2",
-		"password" => md5("parola"),
-	),
-	array(
-		"email" => "adr.coman@gmail.com",
-		"username" => "userno1",
-		"password" => md5(""),
-	),
-	array(
-		"email" => "alex.dan.tomescu@gmail.com",
-		"username" => "userno2",
-		"password" => md5("parola"),
-	),
-);
+class ErrorMessages
+{
+	public static $errors = array();
 
-$arrCategories = array (
-	array(
-		"link" => "programming",
-		"title" => "Programming",
-		"icon" => "fa-html5",
-	),
-	array(
-		"link" => "photography",
-		"title" => "Photography",
-		"icon" => "fa-camera",
-	),
-	array(
-		"link" => "gardening",
-		"title" => "Gardening",
-		"icon" => "fa-pagelines",
-	),
-	array(
-		"link" => "sports",
-		"title" => "Sports",
-		"icon" => "fa-trophy",
-	),
-	array(
-		"link" => "mobile",
-		"title" => "Mobile",
-		"icon" => "fa-android",
-	),
-	array(
-		"link" => "photoshop",
-		"title" => "Photoshop",
-		"icon" => "fa-picture-o",
-	),
-	array(
-		"link" => "networking",
-		"title" => "Networking",
-		"icon" => "fa-sitemap",
-	),
-);
+	public static function show($strIndex)
+	{
+		if(array_key_exists($strIndex, self::$errors))
+			echo $errors[$strIndex];
+	}
+}
+
+try 
+{
+    $dbh = new PDO('mysql:host=localhost;dbname=iocproject', "root", "");
+}
+catch (PDOException $e) 
+{
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
+
+$arrCategories = $dbh->query("
+		SELECT * FROM `categories`
+	")->fetchAll(PDO::FETCH_ASSOC);
+	
 
 /* LOGIN */
-if (isset($_GET["page"]) && $_GET["page"] == "login" && isset($_POST["btnLogin"]))
-{
-	$strEmail = $_POST["email"];
-	$strPasswordEncrypted = md5($_POST["password"]);
-	$login = array_reduce(
-		$arrUsers,
-		function ($result, $item)
-		{
-			global $strEmail, $strPasswordEncrypted;
-			if ($item["email"]==$strEmail && $item["password"]==$strPasswordEncrypted)
-			{
-				$result = $item;
-			}
-			return $result;
-		},
-		null
-	);
-
-	if ($login)
+if (isset($_GET["page"]) && $_GET["page"] == "login")
+{	
+ 	if(isset($_POST["btnLogin"]))
 	{
-		$login["interests"] = array();
-		$_SESSION["account"] = $login;
-		redirect("/");
+		$result = $dbh->query("
+			SELECT * FROM `users`
+			WHERE 
+				`user_email` = ".$dbh->quote($_POST["email"])."
+				AND
+				`user_password` = ".$dbh->quote(md5($_POST["password"]))
+			)->fetch(PDO::FETCH_ASSOC);
+		if ($result)
+		{
+			$_SESSION["account"] = $result;
+			redirect("/");
+		}
+	}
+	if(isset($_POST["btnSignup"]))
+	{
+		if ($_POST["user_password"]!==$_POST["user_password_confirm"])
+		{	
+			$_Error["btnSignup"] = "Password do not match!";
+		} else
+		{
+			$dbh->exec("
+				INSERT INTO `users` 
+				SET
+					`user_email` = ".$dbh->quote($_POST["user_email"]).",
+					`user_password` = ".$dbh->quote(md5($_POST["user_password"]))."
+			");
+			$nUserID = $dbh->lastInsertId();
+			$result = $dbh->query("
+				SELECT * FROM `users`
+				WHERE 
+					`user_id` = ".(int)$nUserID."
+				")->fetch(PDO::FETCH_ASSOC);
+			if ($result)
+			{
+				$_SESSION["account"] = $result;
+				redirect("/");
+			}
+		}
 	}
 }
 
@@ -97,7 +86,8 @@ if (isset($_GET["page"]) && $_GET["page"]=="logout")
 }
 
 /* PROFILE */
-if (isset($_GET["page"]) && $_GET["page"]=="profile" && empty($_SESSION["account"]))
+$arrRestrictedPages = array ("profile");
+if (isset($_GET["page"]) && in_array($_GET["page"], $arrRestrictedPages) && empty($_SESSION["account"]))
 {
 	redirect("/?page=login");
 }
@@ -105,7 +95,20 @@ if (isset($_GET["page"]) && $_GET["page"]=="profile" && empty($_SESSION["account
 if (isset($_GET["page"]) && $_GET["page"]=="profile" && isset($_POST["btnSaveProfile"]))
 {
 	unset($_POST["btnSaveProfile"]);
-	$_SESSION["account"] = array_merge($_SESSION["account"], $_POST);
+	$dbh->exec("
+		UPDATE 
+			`users` 
+		SET
+			`user_name` = ".$dbh->quote($_POST["user_name"]).",
+			`user_email` = ".$dbh->quote($_POST["user_email"]).",
+			`user_favorites` = ".$dbh->quote(json_encode($_POST["user_favorites"]))."
+		WHERE
+			`user_id` = ".(int)$_SESSION["account"]["user_id"]."
+		");
+	$result = $dbh->query("
+		SELECT * FROM `users` WHERE
+			`user_id` = ".(int)$_SESSION["account"]["user_id"]."")->fetch(PDO::FETCH_ASSOC);
+	$_SESSION["account"] = $result;
 
 }
 
