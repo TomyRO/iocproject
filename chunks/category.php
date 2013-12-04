@@ -1,27 +1,18 @@
 <ul id="gallery">
+    <?php 
+    foreach ($arrTutorials as $objTutorial)
+    {
+    ?>
     <li class="tutorial-item">
         <a href="#"><div class="tutorial-image"></div></a>
         <div class="tutorial-descript">
-            <a href="#"><h2> XML Parsing </h2></a>
-            <span class="tutorial-author">Author: John Doe</span>
-            <p>Lorem ipsum doclor sit amet, consectetur adipiscing elit. Mauris pellentesque, metus vel sagittis tincidunt, massa tortor ullamcorper eros, eu dictum eros urna ac turpis. Aliquam sed tellus lorem. Pellentesque condimentum quam sodales sapien consequat fermentum. eleifend aliquam.</p>
+            <a href="/?page=tutorial&id=<?php echo $objTutorial["tutorial_id"];?>"><h2> <?php echo $objTutorial["tutorial_title"]?> </h2></a>
+            <span class="tutorial-author">Author: <?php echo $objTutorial["user_name"]?></span>
+            <p><?php echo $objTutorial["tutorial_revision_content"]?></p>
         </div>
     </li>
-    <li class="tutorial-item">
-        <a href="#"><div class="tutorial-image"></div></a>
-        <div class="tutorial-descript">
-            <a href="#"><h2> XML Parsing </h2></a>
-            <span class="tutorial-author">Author: John Doe</span>
-            <p>Lorem ipsum doclor sit amet, consectetur adipiscing elit. Mauris pellentesque, metus vel sagittis tincidunt, massa tortor ullamcorper eros, eu dictum eros urna ac turpis. Aliquam sed tellus lorem. Pellentesque condimentum quam sodales sapien consequat fermentum. eleifend aliquam.</p>
-        </div>
-    </li>
-    <li class="tutorial-item">
-        <a href="#"><div class="tutorial-image"></div></a>
-        <div class="tutorial-descript">
-            <a href="#"><h2> XML Parsing </h2></a>
-            <span class="tutorial-author">Author: John Doe</span>
-            <p>Lorem ipsum doclor sit amet, consectetur adipiscing elit. Mauris pellentesque, metus vel sagittis tincidunt, massa tortor ullamcorper eros, eu dictum eros urna ac turpis. Aliquam sed tellus lorem. Pellentesque condimentum quam sodales sapien consequat fermentum. eleifend aliquam.</p>
-        </div>
-    </li>
+    <?php
+    }
+    ?>
 </ul>
 <?php require_once("sidebar.php") ?>

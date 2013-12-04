@@ -15,7 +15,7 @@
     <script type="text/javascript" src="scripts/jHtmlArea-0.7.5.js"></script>
 
     <link rel="Stylesheet" type="text/css" href="style/jqueryui/ui-lightness/jquery-ui-1.7.2.custom.css" />
-</head>>
+</head>
 <body>
 	<?php require_once("chunks/header.php"); ?>
 	<div id="wrapper">

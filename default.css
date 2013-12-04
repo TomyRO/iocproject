@@ -119,6 +119,22 @@ table td
 
 }
 
+.error_message
+{
+	font-weight: bold;
+	background: #FF3333;
+	color: #FFFFFF;
+	padding:0px 5px;
+}
+
+section 
+{
+	border: 1px solid #666;
+	margin: 9px 0;
+	padding: 10px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;	
+}
 /** WRAPPER */
 
 #wrapper {

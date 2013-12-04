@@ -51,11 +51,11 @@
         <form action="" method="post">
 
         <div id="title">
-            <h2>Title</h2> <br><input type="text" name="title">
+            <h2>Title</h2> <br><input type="text" name="tutorial_title">
         </div>
-        <textarea id="txtDefaultHtmlArea" name="description" cols="100" rows="30"><p><h3>Test H3</h3>This is some sample text to test out the <b>WYSIWYG Control</b>.</p></textarea>
+        <textarea id="txtDefaultHtmlArea" name="tutorial_revision_content" cols="100" rows="30"><p><h3>Test H3</h3>This is some sample text to test out the <b>WYSIWYG Control</b>.</p></textarea>
 
-        <input type="submit" value="Submit">
+        <input type="submit" name="btnSaveTutorial" value="Submit">
     </div>
 </form>
 
