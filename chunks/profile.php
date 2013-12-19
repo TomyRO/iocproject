@@ -8,7 +8,7 @@
 		<li><a href="/?page=create-tutorial&id=<?php echo $objTutorial["tutorial_id"]; ?>"><?php echo $objTutorial["tutorial_title"];?></a></li>
 	<?php } ?>
 	</ul>
-	<a href="/?page=create-tutorial">Add tutorial</a>
+	<a class="button" href="/?page=create-tutorial">Add tutorial</a>
 </section>
 <section>
 	<h1> My details</h1>
