@@ -1,7 +1,7 @@
 <?php
 /* DATAZZzzzZZZ*/
 ini_set("display_errors", 1);
-error_reporting(E_ALL);
+error_reporting(-1);
 
 session_start();
 
@@ -99,6 +99,17 @@ if (isset($_GET["page"]))
 		redirect("/?page=login");
 
 	/* PROFILE */
+	if ($_GET["page"]=="profile")
+	{
+		$arrMyTutorials = $dbh->query("
+				SELECT * FROM `tutorials` t
+				INNER JOIN
+					`tutorial_revisions` tr ON tr.`tutorial_revision_id` = t.`tutorial_revision_id` 
+				WHERE
+					tr.`user_id` = ".(int)$_SESSION["account"]["user_id"]."
+			")->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
 	if ($_GET["page"]=="profile" && isset($_POST["btnSaveProfile"]))
 	{
 		$dbh->exec("
@@ -125,49 +136,119 @@ if (isset($_GET["page"]))
 			$objTutorial = $dbh->query("
 				SELECT * FROM `tutorials` t
 				INNER JOIN
-					`tutorial_revisions` tr ON tr.`tutorial_id` = t.`tutorial_id` 
+					`tutorial_revisions` tr ON tr.`tutorial_revision_id` = t.`tutorial_revision_id` 
 				INNER JOIN
 					`users` u ON u.`user_id` = tr.`user_id`
 				WHERE
 					t.`tutorial_id` = ".(int)$_GET["id"]."
 			")->fetch(PDO::FETCH_ASSOC);
+
+			if (!$objTutorial)
+				redirect("/?page=404");
+			else 
+			{
+				if (isset($_POST["btnComment"]))
+				{
+					$dbh->exec("INSERT INTO `comments` (`comment_text`, `user_id`, `tutorial_id`)
+						VALUES (
+							".$dbh->quote($_POST["comment"]).",
+							".$_SESSION["account"]["user_id"].",
+							".(int)$_GET["id"]."
+						)"
+					);
+					redirect("/?page=tutorial&id=".(int)$_GET["id"]);
+				}
+				$dbh->exec("UPDATE `tutorials` SET `tutorial_views`=`tutorial_views`+1 WHERE `tutorial_id` = ".(int)$_GET["id"]." ");
+			}
 		}
 		else
-			$_GET["page"] = "404";
+			redirect("/?page=404");
 	}
-	if ($_GET["page"] == "create-tutorial" && isset($_POST["btnSaveTutorial"]))
+	if ($_GET["page"] == "create-tutorial")
 	{
-		$dbh->query("
-			INSERT INTO `tutorials` 
-			SET
-				`tutorial_title` = ".$dbh->quote($_POST["tutorial_title"])."
-		");
-		$nTutorialID = $dbh->lastInsertId();
+		if (isset($_GET["id"])) 
+		{
 
-		$dbh->query("
-			INSERT INTO `tutorial_revisions` 
-			SET
-				`tutorial_revision_content` = ".$dbh->quote($_POST["tutorial_revision_content"]).",
-				`tutorial_id` = ".(int)$nTutorialID.",
-				`user_id` = ".(int)$_SESSION["account"]["user_id"]."
-		");
-		$nTutorialRevisionID = $dbh->lastInsertId();
-		$dbh->query("
-			UPDATE `tutorials` 
-			SET
-				`tutorial_revision_id` = ".(int)$nTutorialRevisionID."
-		");
+		    $objTutorial = $dbh->query("
+		        SELECT * FROM `tutorials` t
+		        WHERE
+		            t.`tutorial_id` = ".(int)$_GET["id"]."
+		    ")->fetch(PDO::FETCH_ASSOC);
+		    $nTutorialRevisionID = (isset($_GET["revision"]))?$_GET["revision"]:$objTutorial["tutorial_revision_id"];
 
-		redirect("/?page=tutorial&id=".$nTutorialID);
+		    $objRevision = $dbh->query("
+		        SELECT * FROM `tutorial_revisions` t
+		        WHERE
+		            t.`tutorial_revision_id` = ".(int)$nTutorialRevisionID."
+		    ")->fetch(PDO::FETCH_ASSOC);
+		    if (!$objRevision)
+		        redirect("/?page=404");
+		    else 
+		        $objTutorial=array_merge($objTutorial, $objRevision);
+
+		}
+		if (isset($_POST["btnSaveTutorial"]))
+		{
+			if (isset($_GET["id"]))
+			{
+				$nTutorialID = (int)$_GET["id"];
+				$dbh->query("
+					INSERT INTO `tutorial_revisions` 
+					SET
+						`tutorial_revision_content` = ".$dbh->quote($_POST["tutorial_revision_content"]).",
+						`tutorial_id` = ".(int)$nTutorialID.",
+						`user_id` = ".(int)$_SESSION["account"]["user_id"]."
+				");
+				$nTutorialRevisionID = $dbh->lastInsertId();
+				$dbh->query("
+					UPDATE `tutorials` 
+					SET
+						`tutorial_title` = ".$dbh->quote($_POST["tutorial_title"]).",
+						`category_id` = ".$dbh->quote($_POST["category_id"]).",
+						`tutorial_revision_id` = ".(int)$nTutorialRevisionID."
+					WHERE
+						`tutorial_id` = ".$nTutorialID."
+				");
+			} 
+			else
+			{
+				$dbh->query("
+					INSERT INTO `tutorials` 
+					SET
+						`tutorial_title` = ".$dbh->quote($_POST["tutorial_title"])."
+						`category_id` = ".$dbh->quote($_POST["category_id"])."
+				");
+				$nTutorialID = $dbh->lastInsertId();
+
+				$dbh->query("
+					INSERT INTO `tutorial_revisions` 
+					SET
+						`tutorial_revision_content` = ".$dbh->quote($_POST["tutorial_revision_content"]).",
+						`tutorial_id` = ".(int)$nTutorialID.",
+						`user_id` = ".(int)$_SESSION["account"]["user_id"]."
+				");
+				$nTutorialRevisionID = $dbh->lastInsertId();
+				$dbh->query("
+					UPDATE `tutorials` 
+					SET
+						`tutorial_revision_id` = ".(int)$nTutorialRevisionID."
+					WHERE
+						`tutorial_id` = ".$nTutorialID."
+				");
+			}
+			redirect("/?page=tutorial&id=".$nTutorialID);
+		}
+
 	}
+
 	if ($_GET["page"] == "category")
 	{
 		$arrTutorials = $dbh->query("
 			SELECT * FROM `tutorials` t
-				INNER JOIN
-					`tutorial_revisions` tr ON tr.`tutorial_id` = t.`tutorial_id` 
-				INNER JOIN
-					`users` u ON u.`user_id` = tr.`user_id`
+			INNER JOIN
+				`tutorial_revisions` tr ON tr.`tutorial_revision_id` = t.`tutorial_revision_id` 
+			INNER JOIN
+				`users` u ON u.`user_id` = tr.`user_id`
 		");
 	}
 }

@@ -1,62 +1,55 @@
-<script type="text/javascript">
-// You can do this to perform a global override of any of the "default" options
-// jHtmlArea.fn.defaultOptions.css = "jHtmlArea.Editor.css";
-
-    $(function() {
-        //$("textarea").htmlarea(); // Initialize all TextArea's as jHtmlArea's with default values
-
-        $("#txtDefaultHtmlArea").htmlarea(); // Initialize jHtmlArea's with all default values
-
-        $("#txtCustomHtmlArea").htmlarea({
-            // Override/Specify the Toolbar buttons to show
-            toolbar: [
-                ["bold", "italic", "underline", "|", "forecolor"],
-                ["p", "h1", "h2", "h3", "h4", "h5", "h6"],
-                ["link", "unlink", "|", "image"],
-                [{
-                    // This is how to add a completely custom Toolbar Button
-                    css: "custom_disk_button",
-                    text: "Save",
-                    action: function(btn) {
-                        // 'this' = jHtmlArea object
-                        // 'btn' = jQuery object that represents the <A> "anchor" tag for the Toolbar Button
-                        alert('SAVE!\n\n' + this.toHtmlString());
-                    }
-                }]
-            ],
-
-            // Override any of the toolbarText values - these are the Alt Text / Tooltips shown
-            // when the user hovers the mouse over the Toolbar Buttons
-            // Here are a couple translated to German, thanks to Google Translate.
-            toolbarText: $.extend({}, jHtmlArea.defaultOptions.toolbarText, {
-                    "bold": "fett",
-                    "italic": "kursiv",
-                    "underline": "unterstreichen"
-                }),
-
-            // Specify a specific CSS file to use for the Editor
-            css: "style//jHtmlArea.Editor.css",
-
-            // Do something once the editor has finished loading
-            loaded: function() {
-                //// 'this' is equal to the jHtmlArea object
-                //alert("jHtmlArea has loaded!");
-                //this.showHTMLView(); // show the HTML view once the editor has finished loading
-            }
-        });
-    });
+<script>
+$(function () {
+    CKEDITOR.replaceAll();
+});
 </script>
 
-    <div id="tutorial-create">
-        <form action="" method="post">
+<div id="tutorial-create">
+    <form action="" method="post">
 
-        <div id="title">
-            <h2>Title</h2> <br><input type="text" name="tutorial_title">
-        </div>
-        <textarea id="txtDefaultHtmlArea" name="tutorial_revision_content" cols="100" rows="30"><p><h3>Test H3</h3>This is some sample text to test out the <b>WYSIWYG Control</b>.</p></textarea>
-
-        <input type="submit" name="btnSaveTutorial" value="Submit">
+    <div id="title">
+        <h3>Title</h3>
+        <input type="text" name="tutorial_title" value="<?php echo @$objTutorial["tutorial_title"]?>">
     </div>
-</form>
+        <h3>Category</h3>
+        <select name="category_id">
+            <?php foreach ($arrCategories as $objCategory) { 
+                $selected=($objCategory["category_id"]==$objTutorial["category_id"])?"selected":"";
+                ?>
+            <option value="<?php echo $objCategory["category_id"]?>" <?php echo $selected;?> >
+                <?php echo $objCategory["category_title"]?>
+            </option>
+            <?php } ?>
+        </select>
+        <h3>Content</h3>
+    <textarea id="txtDefaultHtmlArea" name="tutorial_revision_content" cols="100" rows="30"><?php echo @$objTutorial["tutorial_revision_content"]?></textarea>
 
-<?php require_once("sidebar.php"); ?>
+    <input type="submit" name="btnSaveTutorial" value="Submit">
+    </form>
+</div>
+<?php
+if (isset($_GET["id"])) 
+{?>
+    <div id="sidebar">
+        <span id="top-rated">History</span>
+        <?php
+            $top_rate = $dbh->query("
+                SELECT * FROM `tutorial_revisions` tr 
+                WHERE `tutorial_id`=".(int)$_GET["id"]."
+                ORDER by tr.`tutorial_revision_id` DESC
+            ")->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+        <ul id="top-rated-list">
+            <?php
+                foreach ($top_rate as $tut)
+                { ?>
+            <li class="top-tutorial">
+                <a href="/?page=create-tutorial&id=<?php echo $tut["tutorial_id"]; ?>&revision=<?php echo $tut["tutorial_revision_id"]; ?>">
+                    <?php echo $tut["tutorial_revision_modified"]; ?>
+                </a>
+            </li>
+            <?php } ?>
+            
+        </ul>
+    </div>
+<?php } ?>

@@ -1,16 +1,31 @@
 <div id="comment-section">
+    <?php
+        if (!empty($_SESSION["account"])) 
+            { ?>
     <form action="" method="post">
-        <textarea rows="4" cols="50"> </textarea><br>
-        <input type="submit" value="Send">
+        <textarea name="comment" rows="4" cols="50"> </textarea><br>
+        <input type="submit" value="Send" name="btnComment">
     </form>
+        <?php } ?>
 
     <ul id="comment-list">
+    <?php
+        $arrComments = $dbh->query("
+            SELECT * FROM `comments` c 
+            JOIN `users` u ON u.`user_id`=c.`user_id` 
+            WHERE 
+                c.`tutorial_id`=".(int)$_GET["id"]."
+            ORDER by c.`comment_id` DESC
+        ")->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($arrComments as $objComment)
+        {
+    ?>
         <li>
             <ul>
-                <li id="author">John Doe</li>
-                <li id="date">20/11/2013</li>
-                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae dolor sed massa lacinia accumsan. Vivamus id sagittis magna, id porta sapien. Nunc volutpat est justo, sit amet rutrum leo feugiat nec. Aliquam in urna a diam fringilla aliquet vitae a odio. Aliquam molestie mi eu mi volutpat faucibus. Nam sit amet cursus velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas iaculis venenatis lorem et cursus.</li>
+                <li id="author"><?php echo $objComment["user_name"];?></li>
+                <li><?php echo $objComment["comment_text"];?></li>
             </ul>
         </li>
+    <?php } ?>
     </ul>
 </div>

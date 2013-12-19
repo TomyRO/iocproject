@@ -11,9 +11,7 @@
 	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 	<link href="default.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="font-awesome.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="Stylesheet" type="text/css" href="style/jHtmlArea.css" />
-    <script type="text/javascript" src="scripts/jHtmlArea-0.7.5.js"></script>
-
+    <script type="text/javascript" src="scripts/ckeditor/ckeditor.js"></script>
     <link rel="Stylesheet" type="text/css" href="style/jqueryui/ui-lightness/jquery-ui-1.7.2.custom.css" />
 </head>
 <body>
@@ -28,26 +26,6 @@
 			?>
 		</div>
 	</div>
-<!--
-<div id="portfolio-wrapper">
-	<div id="portfolio" class="container">
-		<div class="title">
-			<h2>Suspendisse lacus turpis</h2>
-			<span class="byline">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</span> </div>
-		<div id="column1">
-			<p>Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie.</p>
-			<a href="#" class="button">Read More</a> </div>
-		<div id="column2">
-			<p>Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie.</p>
-			<a href="#" class="button">Read More</a> </div>
-		<div id="column3">
-			<p>Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie.</p>
-			<a href="#" class="button">Read More</a> </div>
-		<div id="column4">
-			<p>Etiam non felis. Donec ut ante. In id eros. Suspendisse lacus turpis, cursus egestas at sem. Mauris quam enim, molestie.</p>
-			<a href="#" class="button">Read More</a> </div>
-	</div>
-</div>
--->
+
 </body>
 </html>

@@ -7,5 +7,5 @@
     </div>
 </div>
 
-<?php require_once("sidebar.php"); ?>
+<?php require_once("chunks/sidebar.php"); ?>
 <?php require_once("comments.php"); ?>
