@@ -5,7 +5,7 @@
 				<h1><a href="/">Logo</a></h1>
 			</div>
             <div id="searchform">
-                <form action="#" method="get">
+                <form action="?/page=search" method="get">
                     <input name="q" value="Search keywords" />
                     <input type="submit" class="icon icon-search" value="Search" />
                 </form>

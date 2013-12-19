@@ -1,5 +1,5 @@
 <div id="sidebar">
-    <span id="top-rated">Top Rated</span>
+    <span id="top-rated">Top Viewed</span>
     <?php
     	$top_rate = $dbh->query("
     		SELECT * FROM `tutorials` t

@@ -241,7 +241,7 @@ if (isset($_GET["page"]))
 
 	}
 
-	if ($_GET["page"] == "category")
+	if ($_GET["page"] == "category" && isset($_GET["cat"]))
 	{
 		$arrTutorials = $dbh->query("
 			SELECT * FROM `tutorials` t
@@ -249,8 +249,28 @@ if (isset($_GET["page"]))
 				`tutorial_revisions` tr ON tr.`tutorial_revision_id` = t.`tutorial_revision_id` 
 			INNER JOIN
 				`users` u ON u.`user_id` = tr.`user_id`
-		");
+			INNER JOIN 
+				`categories` c ON t.`category_id`=c.`category_id` 
+			WHERE
+				c.`category_link`=".$dbh->quote($_GET["cat"])."
+		")->fetchAll(PDO::FETCH_ASSOC);
 	}
+}
+if (isset($_GET["q"]))
+{
+
+	$arrTutorials = $dbh->query("
+		SELECT * FROM `tutorials` t
+		INNER JOIN
+			`tutorial_revisions` tr ON tr.`tutorial_revision_id` = t.`tutorial_revision_id` 
+		INNER JOIN
+			`users` u ON u.`user_id` = tr.`user_id`
+		WHERE
+			t.`tutorial_title` LIKE '%".$_GET["q"]."%' OR
+			tr.`tutorial_revision_content` LIKE '%".$_GET["q"]."%'
+	");
+	
+	$_GET["page"] = "category";
 }
 function redirect($url)
 {	
